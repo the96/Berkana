@@ -62,32 +62,23 @@ public class Controller implements Initializable{
         for (ChatMessageDataLog chat : chatController.getChatlog()) {
             addLog(chat);
         }
-/*        new Thread(() -> {
-            while (i != rowCount) {
-                System.out.println(i + ":" + rowCount);
+        new Thread(() -> {
+            do {
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            System.out.println(i + ":" + rowCount);
-            Platform.runLater(() -> {
-                        scrollPane.setVvalue(scrollPane.getVmax());
-                    }
-            );
+            }while (i != rowCount);
+            Platform.runLater(() -> scrollPane.setVvalue(scrollPane.getVmax()));
         }).start();
-        */
     }
 
     public void addLog(ChatMessageDataLog chat) {
         ChatLogPanel clp = new ChatLogPanel(chat,chatLogButtonHandler);
         chatLogPanel.add(clp);
         chatLogPanelMap.put(clp.getButton().hashCode(),clp);
-        Platform.runLater(() -> {
-                    logPane.addRow(rowCount++, clp.getLabel(), clp.getButton());
-                }
-        );
+        Platform.runLater(() -> logPane.addRow(rowCount++, clp.getLabel(), clp.getButton()));
     }
 
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
