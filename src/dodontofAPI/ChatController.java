@@ -41,6 +41,37 @@ public class ChatController {
             e.printStackTrace();
         }
     }
+    public void testReloadChatLog() {
+        try {
+            double time = latestGetTime + 1;
+            String mill = String.format("%.6f",time);
+            String json = "{\n" +
+                "  \"chatMessageDataLog\": [\n" +
+                "    [\n" +
+                "      "+ mill +",\n" +
+                "      {\n" +
+                "        \"message\": \"テスト用のメッセージ"+ mill +"\",\n" +
+                "        \"senderName\": \"テスト\\t\",\n" +
+                "        \"color\": \"000000\",\n" +
+                "        \"uniqueId\": \"jfw2na25\\tjhdji7zv\",\n" +
+                "        \"channel\": 0\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  ],\n" +
+                "  \"result\": \"OK\"\n" +
+                "}";
+            ObjectMapper map = new ObjectMapper();
+            Result result = null;
+            result = map.readValue(json, new TypeReference<Result>() {});
+            lastAddedLog = result.getChatMessageDataLog();
+            chatlog.addAll(lastAddedLog);
+            latestGetTime = Math.max(latestGetTime,result.getLatestChatTime());
+            System.out.println(latestGetTime);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public List<ChatMessageDataLog> getChatlog() {
         return lastAddedLog;
     }

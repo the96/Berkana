@@ -56,11 +56,28 @@ public class Controller implements Initializable{
     @FXML
     public void readChatLog() {
         if (roomNumber.getText().isEmpty()) return;
-        chatController.reloadChatLog(SERVER_URL[0], Integer.parseInt(roomNumber.getText()), "");
-
+        //chatController.reloadChatLog(SERVER_URL[0], Integer.parseInt(roomNumber.getText()), "");
+        chatController.testReloadChatLog();
+        int i = rowCount + chatController.getChatlog().size();
         for (ChatMessageDataLog chat : chatController.getChatlog()) {
             addLog(chat);
         }
+/*        new Thread(() -> {
+            while (i != rowCount) {
+                System.out.println(i + ":" + rowCount);
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(i + ":" + rowCount);
+            Platform.runLater(() -> {
+                        scrollPane.setVvalue(scrollPane.getVmax());
+                    }
+            );
+        }).start();
+        */
     }
 
     public void addLog(ChatMessageDataLog chat) {
@@ -68,8 +85,9 @@ public class Controller implements Initializable{
         chatLogPanel.add(clp);
         chatLogPanelMap.put(clp.getButton().hashCode(),clp);
         Platform.runLater(() -> {
-            logPane.addRow(rowCount++,clp.getLabel(),clp.getButton());
-        });
+                    logPane.addRow(rowCount++, clp.getLabel(), clp.getButton());
+                }
+        );
     }
 
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
