@@ -6,12 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class ChatLogPanel {
+    static int panelNumber = 0;
     private Label label;
     private Button button;
     private ChatMessageDataLog chatMessageDataLog;
     ChatLogPanel(ChatMessageDataLog chatMessageDataLog,EventHandler<ActionEvent> eventHandler) {
         label = new Label(chatMessageDataLog.toString());
-        label.getStyleClass().setAll("log-label");
+        if (panelNumber == 1) {
+            label.getStyleClass().setAll("log-label1");
+        } else {
+            label.getStyleClass().setAll("log-label0");
+        }
+        panelNumber = ++panelNumber % 2;
         button  = new Button("Get");
         button.setOnAction(eventHandler);
         this.chatMessageDataLog =chatMessageDataLog;
