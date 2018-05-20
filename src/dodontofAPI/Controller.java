@@ -1,6 +1,7 @@
 package dodontofAPI;
 
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +27,6 @@ public class Controller implements Initializable{
     private GridPane logPane;
     private ArrayList<ChatLogPanel> chatLogPanel;
     private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
-
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;

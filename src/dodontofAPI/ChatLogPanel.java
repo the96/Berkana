@@ -11,6 +11,7 @@ public class ChatLogPanel {
     private ChatMessageDataLog chatMessageDataLog;
     ChatLogPanel(ChatMessageDataLog chatMessageDataLog,EventHandler<ActionEvent> eventHandler) {
         label = new Label(chatMessageDataLog.toString());
+        label.getStyleClass().setAll("log-label");
         button  = new Button("Get");
         button.setOnAction(eventHandler);
         this.chatMessageDataLog =chatMessageDataLog;
