@@ -78,7 +78,9 @@ public class Controller implements Initializable{
         ChatLogPanel clp = new ChatLogPanel(chat,chatLogButtonHandler);
         chatLogPanel.add(clp);
         chatLogPanelMap.put(clp.getButton().hashCode(),clp);
-        Platform.runLater(() -> logPane.addRow(rowCount++, clp.getLabel(), clp.getButton()));
+        Platform.runLater(() -> {
+            logPane.addRow(rowCount++, clp.getPane());
+        });
     }
 
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
