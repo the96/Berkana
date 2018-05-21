@@ -21,13 +21,14 @@ public class ChatLogPanel {
         label = new Label(chatMessageDataLog.toString());
         button  = new Button("Get");
         button.setOnAction(eventHandler);
-        button.setMinWidth(20);
+        button.setMinWidth(35);
         this.chatMessageDataLog =chatMessageDataLog;
         pane = new GridPane();
         pane.addRow(0,label,button);
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setHgrow(Priority.ALWAYS);
         ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPrefWidth(39);
         pane.getColumnConstraints().addAll(column1,column2);
         pane.getStyleClass().setAll("log-pane" + panelNumber);
         panelNumber = ++panelNumber % 2;

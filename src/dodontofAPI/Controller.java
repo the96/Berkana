@@ -1,15 +1,18 @@
 package dodontofAPI;
 
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,6 +48,11 @@ public class Controller implements Initializable{
         scrollPane.setContent(logPane);
         chatLogButtonHandler = new ChatLogButtonHandler();
         chatLogPanelMap = new HashMap<>();
+        logPane.getStyleClass().setAll("log-pane-background");
+        scrollPane.getStyleClass().setAll("scroll-pane");
+        Paint fill = Paint.valueOf("#303030");
+        Insets insets = new Insets(0,0,scrollPane.getVmax(),scrollPane.getHmax());
+        scrollPane.setBackground(new Background(new BackgroundFill(fill,null,insets)));
     }
 
     public void fetchServerInfo() {

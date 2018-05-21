@@ -9,11 +9,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="324.0" minWidth="357.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
-   <GridPane GridPane.hgrow="ALWAYS">
+<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="324.0" minWidth="360.0" prefHeight="324.0" prefWidth="360.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
+   <GridPane prefHeight="90.0" prefWidth="313.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
      <columnConstraints>
-       <ColumnConstraints hgrow="NEVER" maxWidth="181.0" minWidth="10.0" prefWidth="77.0" />
-       <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="255.0" minWidth="10.0" prefWidth="255.0" />
+       <ColumnConstraints hgrow="NEVER" maxWidth="181.0" minWidth="10.0" prefWidth="72.0" />
+       <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="265.0" minWidth="10.0" prefWidth="44.0" />
+         <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="457.0" minWidth="10.0" prefWidth="222.0" />
          <ColumnConstraints />
      </columnConstraints>
      <rowConstraints>
@@ -25,9 +26,9 @@
           <Label fx:id="pane_title" prefHeight="17.0" prefWidth="79.0" text="ServerStatus" />
           <Button fx:id="fetch" onAction="#fetchServerInfo" text="fetch" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
           <Label fx:id="label" prefHeight="30.0" prefWidth="335.0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
-         <GridPane prefHeight="30.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane prefHeight="30.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
            <columnConstraints>
-               <ColumnConstraints hgrow="NEVER" maxWidth="220.0" minWidth="10.0" prefWidth="153.0" />
+               <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="220.0" minWidth="10.0" prefWidth="40.0" />
              <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="58.0" />
                <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="44.0" />
            </columnConstraints>
@@ -47,11 +48,18 @@
    </GridPane>
    <ScrollPane fx:id="scrollPane" fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="356.0" vbarPolicy="ALWAYS" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
       <content>
-         <GridPane fx:id="logPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <GridPane fx:id="logPane" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="342.0">
            <columnConstraints>
-             <ColumnConstraints hgrow="always" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
            </columnConstraints>
          </GridPane>
       </content>
    </ScrollPane>
+   <columnConstraints>
+      <ColumnConstraints minWidth="-Infinity" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints fillHeight="false" minHeight="-Infinity" valignment="TOP" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" />
+   </rowConstraints>
 </GridPane>
