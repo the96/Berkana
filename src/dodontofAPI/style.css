@@ -1,15 +1,15 @@
 .log-pane0 {
-    -fx-background-color:#39393d;
+    /*-fx-background-color:#39393d;*/
 }
 .log-pane1{
-    -fx-background-color:#232326;
+    /*-fx-background-color:#232326;*/
 }
 .button{
     -fx-effect:null;
     -fx-background-color: white;
 }
 .root {
-    -fx-background-color: #303030;
+    /*-fx-background-color: #303030;*/
 }
 .label {
     -fx-text-fill: #f2f2f2;
@@ -21,5 +21,8 @@
 .log-pane-background {
     -fx-pref-width:inherit;
     -fx-pref-height:inherit;
-    -fx-background-color: #303030;
+    /*-fx-background-color: #303030;*/
+}
+#resourceParam{
+    -fx-font-size: 18
 }
