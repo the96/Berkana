@@ -4,7 +4,6 @@ import javafx.event.Event;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ResourcePane implements Initializable{

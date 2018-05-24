@@ -84,7 +84,7 @@ public class Controller implements Initializable{
     public void addLog(ChatMessageDataLog chat) {
         ChatLogPanel clp = new ChatLogPanel(chat,chatLogButtonHandler);
         chatLogPanel.add(clp);
-        chatLogPanelMap.put(clp.getButton().hashCode(),clp);
+        chatLogPanelMap.put(clp.getHashCode(),clp);
         Platform.runLater(() -> {
             logPane.addRow(rowCount++, clp.getPane());
         });

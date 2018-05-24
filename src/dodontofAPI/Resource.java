@@ -23,7 +23,6 @@ public class Resource extends Tab {
             String id = node.getId();
             if (id == null || id.isEmpty()) continue;
             formMap.put(id, (TextField) node);
-            System.out.println(id);
         }
     }
 
