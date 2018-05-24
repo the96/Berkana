@@ -17,6 +17,18 @@ public class ResourcePane implements Initializable{
         resource.setText(resource.getName());
     }
 
+    public void onClickAttack(Event event) {
+
+    }
+
+    public void onClickProtection(Event event) {
+
+    }
+
+    public void onClickHeal(Event event) {
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }

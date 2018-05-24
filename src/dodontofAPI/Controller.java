@@ -111,15 +111,15 @@ public class Controller implements Initializable{
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event){
-                ChatLogPane clp = chatLogPanelMap.get(event.getSource().hashCode());
-                String message = clp.getMessage();
-                // このメッセージがダイスログなら結果を取り出す
-                Pattern p = Pattern.compile("[→] [0-9]+$");
-                Matcher m = p.matcher(message);
-                if(m.find()) {
-                    int dice = Integer.parseInt(m.group().substring(2));
-                    diceSum += clp.isSelected()?dice:dice*-1;
-                }
+            ChatLogPane clp = chatLogPanelMap.get(event.getSource().hashCode());
+            String message = clp.getMessage();
+            // このメッセージがダイスログなら結果を取り出す
+            Pattern p = Pattern.compile("[→] [0-9]+$");
+            Matcher m = p.matcher(message);
+            if(m.find()) {
+                int dice = Integer.parseInt(m.group().substring(2));
+                diceSum += clp.isSelected()?dice:dice*-1;
+            }
         }
     }
 }
