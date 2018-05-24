@@ -54,6 +54,7 @@ public class Controller implements Initializable{
         chatLogPanelMap = new HashMap<>();
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
+        resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
         addTab();
     }
 

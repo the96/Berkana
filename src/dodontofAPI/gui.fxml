@@ -4,15 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="324.0" minWidth="500.0" prefHeight="324.0" prefWidth="570.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
+<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="324.0" minWidth="780.0" prefHeight="324.0" prefWidth="750.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
    <GridPane prefHeight="90.0" prefWidth="313.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
      <columnConstraints>
        <ColumnConstraints hgrow="NEVER" maxWidth="181.0" minWidth="10.0" prefWidth="73.0" />
@@ -59,17 +57,10 @@
          </GridPane>
       </content>
    </ScrollPane>
-   <TabPane fx:id="resourceTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="349.0" prefWidth="308.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
-      <tabs>
-         <Tab text="Untitled Tab">
-           <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-           </content>
-         </Tab>
-      </tabs></TabPane>
+   <TabPane fx:id="resourceTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="349.0" prefWidth="308.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS" />
    <columnConstraints>
-      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="-Infinity" percentWidth="45.0" prefWidth="352.0" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" percentWidth="55.0" prefWidth="350.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="352.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="520.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints fillHeight="false" minHeight="-Infinity" valignment="TOP" vgrow="NEVER" />
