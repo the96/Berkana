@@ -15,6 +15,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class Controller implements Initializable{
     private TabPane resourceTabPane;
     private ArrayList<ChatLogPanel> chatLogPanel;
     private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
+    private ArrayList<Resource> resourceArrayList;
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
@@ -55,6 +57,7 @@ public class Controller implements Initializable{
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
+        resourceArrayList = new ArrayList<>();
         addTab();
     }
 
@@ -98,9 +101,9 @@ public class Controller implements Initializable{
         Platform.runLater(() -> {
             try {
                 GridPane gridPane = (GridPane) FXMLLoader.load(getClass().getResource("ResourcePane.fxml"));
-                ObservableList<Node> resourceList = gridPane.getChildren();
-                Tab tab = new Tab("resource",gridPane);
-                resourceTabPane.getTabs().add(tab);
+                Resource resource = new Resource(gridPane);
+                resourceArrayList.add(resource);
+                resourceTabPane.getTabs().add(resource);
             } catch (IOException e) {
                 e.printStackTrace();
             }
