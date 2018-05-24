@@ -25,8 +25,8 @@ public class Resource extends Tab {
             formMap.put(id, (TextField) node);
             System.out.println(id);
         }
-        super.setText(this.getName());
     }
+
     private int parseInt(String s) {
         int num;
         try {

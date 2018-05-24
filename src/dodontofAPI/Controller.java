@@ -1,21 +1,14 @@
 package dodontofAPI;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +28,7 @@ public class Controller implements Initializable{
     private TabPane resourceTabPane;
     private ArrayList<ChatLogPanel> chatLogPanel;
     private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
-    private ArrayList<Resource> resourceArrayList;
+    private ResourcePane resourcePane;
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
@@ -57,7 +50,7 @@ public class Controller implements Initializable{
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
-        resourceArrayList = new ArrayList<>();
+        resourcePane = new ResourcePane();
         addTab();
     }
 
@@ -100,9 +93,11 @@ public class Controller implements Initializable{
     public void addTab() {
         Platform.runLater(() -> {
             try {
-                GridPane gridPane = (GridPane) FXMLLoader.load(getClass().getResource("ResourcePane.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourcePane.fxml"));
+                GridPane gridPane= loader.load();
+                resourcePane = loader.getController();
                 Resource resource = new Resource(gridPane);
-                resourceArrayList.add(resource);
+                resourcePane.addResource(resource);
                 resourceTabPane.getTabs().add(resource);
             } catch (IOException e) {
                 e.printStackTrace();
