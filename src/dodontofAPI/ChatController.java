@@ -66,7 +66,6 @@ public class ChatController {
             lastAddedLog = result.getChatMessageDataLog();
             chatlog.addAll(lastAddedLog);
             latestGetTime = Math.max(latestGetTime,result.getLatestChatTime());
-            System.out.println(latestGetTime);
         } catch (IOException e) {
             e.printStackTrace();
         }

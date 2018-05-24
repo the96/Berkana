@@ -12,13 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 
-public class ChatLogPanel {
+public class ChatLogPane {
     static int panelNumber = 0;
     private Label label;
     private CheckBox checkBox;
     private GridPane pane;
     private ChatMessageDataLog chatMessageDataLog;
-    ChatLogPanel(ChatMessageDataLog chatMessageDataLog,EventHandler<ActionEvent> eventHandler) {
+    ChatLogPane(ChatMessageDataLog chatMessageDataLog, EventHandler<ActionEvent> eventHandler) {
         label = new Label(chatMessageDataLog.toString());
         checkBox = new CheckBox();
         checkBox.setMinWidth(20);
@@ -37,6 +37,7 @@ public class ChatLogPanel {
     public Label getLabel(){return label;}
     public GridPane getPane() {return pane;}
     public CheckBox getCheckBox() {return checkBox;}
+    public boolean isSelected() {return checkBox.isSelected();}
 
     public double getMilliTime() { return chatMessageDataLog.getMilliTime();}
     public int getColor() {return chatMessageDataLog.getColor();}

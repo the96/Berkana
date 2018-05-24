@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Controller implements Initializable{
     @FXML
@@ -26,9 +28,9 @@ public class Controller implements Initializable{
     private GridPane logPane;
     @FXML
     private TabPane resourceTabPane;
-    private ArrayList<ChatLogPanel> chatLogPanel;
-    private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
-    //private ResourcePane resourcePane;
+    private ArrayList<ChatLogPane> chatLogPane;
+    private HashMap<Integer, ChatLogPane> chatLogPanelMap;
+    private int diceSum;
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
@@ -43,14 +45,14 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         chatController = new ChatController();
         serverInfo = new ServerInfo("official1");
-        chatLogPanel = new ArrayList<>();
+        chatLogPane = new ArrayList<>();
         scrollPane.setContent(logPane);
         chatLogButtonHandler = new ChatLogButtonHandler();
         chatLogPanelMap = new HashMap<>();
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
-        //resourcePane = new ResourcePane();
+        diceSum = 0;
         addTab();
     }
 
@@ -82,8 +84,8 @@ public class Controller implements Initializable{
     }
 
     public void addLog(ChatMessageDataLog chat) {
-        ChatLogPanel clp = new ChatLogPanel(chat,chatLogButtonHandler);
-        chatLogPanel.add(clp);
+        ChatLogPane clp = new ChatLogPane(chat,chatLogButtonHandler);
+        chatLogPane.add(clp);
         chatLogPanelMap.put(clp.getHashCode(),clp);
         Platform.runLater(() -> {
             logPane.addRow(rowCount++, clp.getPane());
@@ -109,8 +111,15 @@ public class Controller implements Initializable{
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event){
-                ChatLogPanel clp = chatLogPanelMap.get(event.getSource().hashCode());
-                System.out.println(clp.getMessage());
+                ChatLogPane clp = chatLogPanelMap.get(event.getSource().hashCode());
+                String message = clp.getMessage();
+                // このメッセージがダイスログなら結果を取り出す
+                Pattern p = Pattern.compile("[→] [0-9]+$");
+                Matcher m = p.matcher(message);
+                if(m.find()) {
+                    int dice = Integer.parseInt(m.group().substring(2));
+                    diceSum += clp.isSelected()?dice:dice*-1;
+                }
         }
     }
 }
