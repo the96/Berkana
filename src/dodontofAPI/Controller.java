@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
@@ -101,7 +102,7 @@ public class Controller implements Initializable{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourcePane.fxml"));
                 GridPane gridPane= loader.load();
                 ResourcePane resourcePane = loader.getController();
-                Resource resource = new Resource(gridPane,new TabChangeHandler());
+                Resource resource = new Resource(gridPane,new TabChangeHandler(),new ResourceTabButtonHandler());
                 resourcePane.setResource(resource);
                 resourcePanes.add(resourcePane);
                 resourceTabPane.getTabs().add(resource);
@@ -112,11 +113,7 @@ public class Controller implements Initializable{
         );
     }
 
-    public void setDamageAndOption(ActionEvent event) {
-
-    }
-
-    class ChatLogButtonHandler implements EventHandler<ActionEvent>{
+    class ChatLogButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event){
             ChatLogPane clp = chatLogPanelMap.get(event.getSource().hashCode());
@@ -134,13 +131,37 @@ public class Controller implements Initializable{
         }
     }
 
-    class TabChangeHandler implements EventHandler<Event>{
+    class TabChangeHandler implements EventHandler<Event> {
         @Override
         public void handle(Event event) {
             if(event.getEventType() == Tab.SELECTION_CHANGED_EVENT) {
                 Resource resource = (Resource) resourceTabPane.getSelectionModel().getSelectedItem();
                 resource.setDamage(diceSum);
                 resource.setOption(diceSum);
+            }
+        }
+    }
+
+    class ResourceTabButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            String sourceId = ((Node)event.getSource()).getId();
+            System.out.println(sourceId);
+            switch (sourceId) {
+                case "attackButton":
+                    break;
+                case "magicButton":
+                    break;
+                case "piercingButton":
+                    break;
+                case "protectButton":
+                    break;
+                case "healButton":
+                    break;
+                case "resetButton":
+                    break;
+                case "calcButton":
+                    break;
             }
         }
     }

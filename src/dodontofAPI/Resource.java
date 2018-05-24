@@ -1,9 +1,12 @@
 package dodontofAPI;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -14,15 +17,21 @@ import java.util.HashMap;
 
 public class Resource extends Tab {
     HashMap<String,TextField> formMap;
-
-    Resource(GridPane gridPane, EventHandler<Event> eventHandler) {
+    HashMap<String,Button> buttonMap;
+    Resource(GridPane gridPane, EventHandler<Event> eventHandler, EventHandler<ActionEvent> actionEventEventHandler) {
         super("resource",gridPane);
         formMap = new HashMap<>();
+        buttonMap = new HashMap<>();
         ObservableList<Node> list = gridPane.getChildren();
         for(Node node:list) {
             String id = node.getId();
             if (id == null || id.isEmpty()) continue;
-            formMap.put(id, (TextField) node);
+            if (node.getClass().getName().indexOf("TextField") >= 0) {
+                formMap.put(id, (TextField) node);
+            } else if (node.getClass().getName().indexOf("Button") >= 0) {
+                buttonMap.put(id,(Button) node);
+                ((Button) node).setOnAction(actionEventEventHandler);
+            }
         }
         this.setOnSelectionChanged(eventHandler);
     }

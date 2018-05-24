@@ -149,7 +149,7 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
       </TextField>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickAttack" text="Attack" GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <Button fx:id="attackButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Attack" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
@@ -157,7 +157,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickAttack" text="Magic" GridPane.columnIndex="2" GridPane.rowIndex="8">
+      <Button fx:id="magicButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Magic" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <font>
             <Font size="18.0" />
          </font>
@@ -165,7 +165,7 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
       </Button>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickAttack" text="Piercing" GridPane.columnIndex="3" GridPane.rowIndex="8">
+      <Button fx:id="piercingButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Piercing" GridPane.columnIndex="3" GridPane.rowIndex="8">
          <font>
             <Font size="18.0" />
          </font>
@@ -181,14 +181,14 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickProtection" text="Protect" GridPane.columnIndex="2" GridPane.rowIndex="10">
+      <Button fx:id="protectButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Protect" GridPane.columnIndex="2" GridPane.rowIndex="10">
          <font>
             <Font size="18.0" />
          </font>
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin></Button>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickHeal" text="Heal" GridPane.columnIndex="3" GridPane.rowIndex="10">
+      <Button fx:id="healButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Heal" GridPane.columnIndex="3" GridPane.rowIndex="10">
          <font>
             <Font size="18.0" />
          </font>
@@ -196,13 +196,21 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
       </Button>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Calc" GridPane.columnIndex="3" GridPane.rowIndex="12">
+      <Button fx:id="calcButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Calc" GridPane.columnIndex="3" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
          <font>
             <Font size="18.0" />
          </font>
+      </Button>
+      <Button fx:id="resetButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Reset" GridPane.rowIndex="12">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </GridPane.margin>
       </Button>
    </children>
 </GridPane>
