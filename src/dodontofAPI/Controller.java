@@ -2,6 +2,7 @@ package dodontofAPI;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class Controller implements Initializable{
     @FXML
     private TabPane resourceTabPane;
     private ArrayList<ChatLogPane> chatLogPane;
+    private ArrayList<ResourcePane> resourcePanes;
     private HashMap<Integer, ChatLogPane> chatLogPanelMap;
     private int diceSum;
 
@@ -52,6 +54,7 @@ public class Controller implements Initializable{
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
+        resourcePanes = new ArrayList<>();
         diceSum = 0;
         addTab();
     }
@@ -98,14 +101,19 @@ public class Controller implements Initializable{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourcePane.fxml"));
                 GridPane gridPane= loader.load();
                 ResourcePane resourcePane = loader.getController();
-                Resource resource = new Resource(gridPane);
+                Resource resource = new Resource(gridPane,new TabChangeHandler());
                 resourcePane.setResource(resource);
+                resourcePanes.add(resourcePane);
                 resourceTabPane.getTabs().add(resource);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         );
+    }
+
+    public void setDamageAndOption(ActionEvent event) {
+
     }
 
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
@@ -119,6 +127,20 @@ public class Controller implements Initializable{
             if(m.find()) {
                 int dice = Integer.parseInt(m.group().substring(2));
                 diceSum += clp.isSelected()?dice:dice*-1;
+                Resource resource = (Resource) resourceTabPane.getSelectionModel().getSelectedItem();
+                resource.setDamage(diceSum);
+                resource.setOption(diceSum);
+            }
+        }
+    }
+
+    class TabChangeHandler implements EventHandler<Event>{
+        @Override
+        public void handle(Event event) {
+            if(event.getEventType() == Tab.SELECTION_CHANGED_EVENT) {
+                Resource resource = (Resource) resourceTabPane.getSelectionModel().getSelectedItem();
+                resource.setDamage(diceSum);
+                resource.setOption(diceSum);
             }
         }
     }

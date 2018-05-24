@@ -46,7 +46,7 @@
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin></TextField>
-      <TextField fx:id="hp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="hp" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <font>
             <Font size="15.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="maxhp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <TextField fx:id="maxhp" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <font>
             <Font size="15.0" />
          </font>
@@ -69,7 +69,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="mp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="mp" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <font>
             <Font size="15.0" />
          </font>
@@ -82,7 +82,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="maxmp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3">
+      <TextField fx:id="maxmp" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
@@ -95,7 +95,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="def" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <TextField fx:id="def" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
@@ -103,7 +103,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="magicDef" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="5">
+      <TextField fx:id="magicDef" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
@@ -126,7 +126,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="mov" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextField fx:id="mov" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <font>
             <Font size="15.0" />
          </font>
@@ -134,14 +134,14 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="initiative" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="6">
+      <TextField fx:id="initiative" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <TextField alignment="CENTER" GridPane.rowIndex="8">
+      <TextField fx:id="damage" alignment="CENTER_RIGHT" GridPane.rowIndex="8">
          <font>
             <Font size="18.0" />
          </font>
@@ -173,7 +173,7 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
       </Button>
-      <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="10">
+      <TextField fx:id="option" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin>
