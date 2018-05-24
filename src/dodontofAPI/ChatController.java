@@ -50,7 +50,7 @@ public class ChatController {
                 "    [\n" +
                 "      "+ mill +",\n" +
                 "      {\n" +
-                "        \"message\": \"テスト用のメッセージ"+ mill +"\",\n" +
+                "        \"message\": \"(3D6) → 8[6,1,1] → "+ (int)time +"\",\n" +
                 "        \"senderName\": \"テスト\\t\",\n" +
                 "        \"color\": \"000000\",\n" +
                 "        \"uniqueId\": \"jfw2na25\\tjhdji7zv\",\n" +
@@ -78,24 +78,4 @@ public class ChatController {
     public ChatMessageDataLog getChatlog(int index) {
         return chatlog.get(index);
     }
-}
-
-class Result {
-    private String result;
-    private List<ChatMessageDataLog> chatMessageDataLog;
-    private double latestChatTime;
-    @JsonCreator
-    private Result(@JsonProperty("result") String result, @JsonProperty("chatMessageDataLog") List<List<Object>> chatObject) {
-        this.result = result;
-        this.chatMessageDataLog = new ArrayList<>();
-        this.latestChatTime = 0;
-        for (List<Object> obj : chatObject) {
-            this.chatMessageDataLog.add(new ChatMessageDataLog((double) obj.get(0),(HashMap<String, Object>) obj.get(1)));
-            this.latestChatTime = Math.max(this.latestChatTime,(double) obj.get(0)+0.000001);
-        }
-    }
-    public List<ChatMessageDataLog> getChatMessageDataLog() {
-        return this.chatMessageDataLog;
-    }
-    public double getLatestChatTime(){return this.latestChatTime;}
 }
