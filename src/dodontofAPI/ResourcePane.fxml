@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="resource" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="400.0" style="-fx-border-radius: 2;"
-          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.ResourcePane">
+<GridPane fx:id="resource" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="400.0" style="-fx-border-radius: 2;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.ResourcePane">
   <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
@@ -36,7 +35,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="resourceName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#resourceRenamed" GridPane.columnIndex="1" GridPane.columnSpan="3">
+      <TextField fx:id="resourceName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#resourceRenamed" onKeyReleased="#resourceRenamed" GridPane.columnIndex="1" GridPane.columnSpan="3">
          <GridPane.margin>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </GridPane.margin></TextField>

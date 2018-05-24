@@ -1,5 +1,6 @@
 package dodontofAPI;
 
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -13,7 +14,7 @@ public class ResourcePane implements Initializable{
         this.resource = resource;
     }
 
-    public void resourceRenamed(javafx.event.ActionEvent actionEvent) {
+    public void resourceRenamed(Event event) {
         resource.setText(resource.getName());
     }
 
