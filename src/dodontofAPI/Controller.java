@@ -28,7 +28,7 @@ public class Controller implements Initializable{
     private TabPane resourceTabPane;
     private ArrayList<ChatLogPanel> chatLogPanel;
     private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
-    private ResourcePane resourcePane;
+    //private ResourcePane resourcePane;
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
@@ -50,7 +50,7 @@ public class Controller implements Initializable{
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
-        resourcePane = new ResourcePane();
+        //resourcePane = new ResourcePane();
         addTab();
     }
 
@@ -95,9 +95,9 @@ public class Controller implements Initializable{
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourcePane.fxml"));
                 GridPane gridPane= loader.load();
-                resourcePane = loader.getController();
+                ResourcePane resourcePane = loader.getController();
                 Resource resource = new Resource(gridPane);
-                resourcePane.addResource(resource);
+                resourcePane.setResource(resource);
                 resourceTabPane.getTabs().add(resource);
             } catch (IOException e) {
                 e.printStackTrace();
