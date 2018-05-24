@@ -19,7 +19,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setHeight(570);
-        primaryStage.setMinWidth(374);
+        primaryStage.setMinWidth(500);
         primaryStage.show();
         final ObservableList<String> css = scene.getStylesheets();
         if (css != null) {

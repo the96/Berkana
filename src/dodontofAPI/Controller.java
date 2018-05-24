@@ -1,19 +1,21 @@
 package dodontofAPI;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class Controller implements Initializable{
     private ScrollPane scrollPane;
     @FXML
     private GridPane logPane;
+    @FXML
+    private TabPane resourceTabPane;
     private ArrayList<ChatLogPanel> chatLogPanel;
     private HashMap<Integer,ChatLogPanel> chatLogPanelMap;
 
@@ -50,9 +54,7 @@ public class Controller implements Initializable{
         chatLogPanelMap = new HashMap<>();
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
-        Paint fill = Paint.valueOf("#303030");
-        Insets insets = new Insets(0,0,scrollPane.getVmax(),scrollPane.getHmax());
-        scrollPane.setBackground(new Background(new BackgroundFill(fill,null,insets)));
+        addTab();
     }
 
     public void fetchServerInfo() {
@@ -91,6 +93,20 @@ public class Controller implements Initializable{
         });
     }
 
+    public void addTab() {
+        Platform.runLater(() -> {
+            try {
+                GridPane gridPane = (GridPane) FXMLLoader.load(getClass().getResource("ResourcePane.fxml"));
+                ObservableList<Node> resourceList = gridPane.getChildren();
+                Tab tab = new Tab("resource",gridPane);
+                resourceTabPane.getTabs().add(tab);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        );
+    }
+
     class ChatLogButtonHandler implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event){
@@ -99,3 +115,4 @@ public class Controller implements Initializable{
         }
     }
 }
+
