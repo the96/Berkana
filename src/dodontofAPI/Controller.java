@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,8 +33,7 @@ public class Controller implements Initializable{
     private TabPane resourceTabPane;
     private ArrayList<ChatLogPane> chatLogPane;
     private ArrayList<ResourcePane> resourcePanes;
-    private HashMap<Integer, ChatLogPane> chatLogPanelMap;
-    private int diceSum;
+    private HashMap<Integer, ChatLogPane> chatLogPaneMap;
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
@@ -43,6 +43,16 @@ public class Controller implements Initializable{
     private ServerInfo serverInfo;
 
     private int rowCount =0;
+    private int diceSum;
+
+    private int attackState;
+    private int optionState;
+    private static final int VOID_SELLECTED = 0;
+    private static final int ATTACK_SELLECTED = 1;
+    private static final int MAGIC_SELLECTED = 2;
+    private static final int PIERCING_SELLECTED = 3;
+    private static final int PROTECT_SELLECTED = 1;
+    private static final int HEAL_SELLECTED = 2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,12 +61,14 @@ public class Controller implements Initializable{
         chatLogPane = new ArrayList<>();
         scrollPane.setContent(logPane);
         chatLogButtonHandler = new ChatLogButtonHandler();
-        chatLogPanelMap = new HashMap<>();
+        chatLogPaneMap = new HashMap<>();
         logPane.getStyleClass().setAll("log-pane-background");
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
         resourcePanes = new ArrayList<>();
         diceSum = 0;
+        attackState = 0;
+        optionState = 0;
         addTab();
     }
 
@@ -90,7 +102,7 @@ public class Controller implements Initializable{
     public void addLog(ChatMessageDataLog chat) {
         ChatLogPane clp = new ChatLogPane(chat,chatLogButtonHandler);
         chatLogPane.add(clp);
-        chatLogPanelMap.put(clp.getHashCode(),clp);
+        chatLogPaneMap.put(clp.getHashCode(),clp);
         Platform.runLater(() -> {
             logPane.addRow(rowCount++, clp.getPane());
         });
@@ -113,10 +125,20 @@ public class Controller implements Initializable{
         );
     }
 
+    public void clearCheckbox() {
+        for (Integer key : chatLogPaneMap.keySet()) {
+            chatLogPaneMap.get(key).setSelected(false);
+        }
+    }
+
+    public Resource getSelectedResource() {
+        return (Resource)resourceTabPane.getSelectionModel().getSelectedItem();
+    }
+
     class ChatLogButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event){
-            ChatLogPane clp = chatLogPanelMap.get(event.getSource().hashCode());
+            ChatLogPane clp = chatLogPaneMap.get(event.getSource().hashCode());
             String message = clp.getMessage();
             // このメッセージがダイスログなら結果を取り出す
             Pattern p = Pattern.compile("[→] [0-9]+$");
@@ -135,7 +157,7 @@ public class Controller implements Initializable{
         @Override
         public void handle(Event event) {
             if(event.getEventType() == Tab.SELECTION_CHANGED_EVENT) {
-                Resource resource = (Resource) resourceTabPane.getSelectionModel().getSelectedItem();
+                Resource resource = getSelectedResource();
                 resource.setDamage(diceSum);
                 resource.setOption(diceSum);
             }
@@ -145,24 +167,80 @@ public class Controller implements Initializable{
     class ResourceTabButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            String sourceId = ((Node)event.getSource()).getId();
-            System.out.println(sourceId);
+            Node node = (Node)event.getSource();
+            String sourceId = node.getId();
+            Resource resource = getSelectedResource();
             switch (sourceId) {
                 case "attackButton":
+                    setAttack(resource);
+                    attackState = ATTACK_SELLECTED;
                     break;
                 case "magicButton":
+                    setAttack(resource);
+                    attackState = MAGIC_SELLECTED;
                     break;
                 case "piercingButton":
+                    setAttack(resource);
+                    attackState = PIERCING_SELLECTED;
                     break;
                 case "protectButton":
+                    setOption(resource);
+                    optionState = PROTECT_SELLECTED;
                     break;
                 case "healButton":
+                    setOption(resource);
+                    optionState = HEAL_SELLECTED;
                     break;
+                case "calcButton": // calcは計算後にresetを実行する
+                    calc(attackState,optionState,resource);
                 case "resetButton":
-                    break;
-                case "calcButton":
+                    attackState = VOID_SELLECTED;
+                    resource.reset();
+                    clearCheckbox();
                     break;
             }
+        }
+
+        private void setAttack(Resource resource) {
+            resource.settlementDamage();
+            resource.setOption(0);
+            diceSum = 0;
+            clearCheckbox();
+        }
+
+        private void setOption(Resource resource) {
+            resource.settlementOption();
+            resource.setDamage(0);
+            diceSum = 0;
+            clearCheckbox();
+        }
+
+        private void calc(int attackState, int optionState, Resource resource) {
+            int damage = resource.getDamage();
+            int opotion = resource.getOption();
+            int hp = resource.getHP();
+            int maxhp = resource.getMaxHP();
+            switch (attackState) {
+                case ATTACK_SELLECTED:
+                    damage -= resource.getDef();
+                    break;
+                case MAGIC_SELLECTED:
+                    damage -= resource.getMagicDef();
+                    break;
+            }
+            switch (optionState) {
+                case HEAL_SELLECTED:
+                    damage -= opotion;
+                    break;
+                case PROTECT_SELLECTED:
+                    damage -= opotion;
+                default:
+                    if(damage < 0)damage = 0;
+                    break;
+            }
+            hp -= damage;
+            hp = Math.min(hp,maxhp);
+            resource.setHP(hp);
         }
     }
 }

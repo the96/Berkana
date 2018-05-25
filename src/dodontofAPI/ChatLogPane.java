@@ -47,4 +47,5 @@ public class ChatLogPane {
     public String getUniqueId() {return chatMessageDataLog.getUniqueId();}
     public String toString() {return chatMessageDataLog.toString();}
     public Integer getHashCode() {return checkBox.hashCode();}
+    public void setSelected(boolean selected) {checkBox.setSelected(selected);}
 }

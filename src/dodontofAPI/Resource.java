@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -16,8 +15,16 @@ import java.util.HashMap;
 
 
 public class Resource extends Tab {
-    HashMap<String,TextField> formMap;
-    HashMap<String,Button> buttonMap;
+    private HashMap<String,TextField> formMap;
+    private HashMap<String,Button> buttonMap;
+    private boolean damageIsSetted,optionIsSetted;
+
+    public static final int SUCCESS_SET_STATUS = 1;
+    public static final int INVALID_ARRAY_SIZE = 2;
+    public static final int INVALID_STATUS = 3;
+
+    public static final int STATUS_SIZE = 8;
+
     Resource(GridPane gridPane, EventHandler<Event> eventHandler, EventHandler<ActionEvent> actionEventEventHandler) {
         super("resource",gridPane);
         formMap = new HashMap<>();
@@ -33,6 +40,18 @@ public class Resource extends Tab {
                 ((Button) node).setOnAction(actionEventEventHandler);
             }
         }
+        switch(this.setStatus(new int[STATUS_SIZE])){
+            case SUCCESS_SET_STATUS:
+                System.out.println("success_set_status");
+                break;
+            case INVALID_ARRAY_SIZE:
+                System.out.println("invalid array size");
+                break;
+            case INVALID_STATUS:
+                System.out.println("invalid status");
+                break;
+        }
+        this.reset();
         this.setOnSelectionChanged(eventHandler);
     }
 
@@ -81,6 +100,22 @@ public class Resource extends Tab {
         return parseInt(formMap.get("option").getText());
     }
 
+    public int setStatus(int[] arrayStatus) {
+        if (arrayStatus.length + 3 != formMap.size()) return INVALID_ARRAY_SIZE;
+        int i = 0;
+        for (String key : formMap.keySet()) {
+            if ("resourceName".equals(key) || "damage".equals(key) || "option".equals(key))continue;
+            int status = arrayStatus[i];
+            if (status < 0) return INVALID_STATUS;
+            formMap.get(key).setText(String.valueOf(status));
+            if (i >= arrayStatus.length) {
+                arrayStatus[i] = 0;
+            } else {
+                i++;
+            }
+        }
+        return SUCCESS_SET_STATUS;
+    }
     public void setHP(int hp) {
         formMap.get("hp").setText(String.valueOf(hp));
     }
@@ -106,9 +141,25 @@ public class Resource extends Tab {
         formMap.get("mov").setText(String.valueOf(mov));
     }
     public void setDamage(int damage) {
-        formMap.get("damage").setText(String.valueOf(damage));
+        if (!damageIsSetted) {
+            formMap.get("damage").setText(String.valueOf(damage));
+        }
     }
     public void setOption(int option) {
-        formMap.get("option").setText(String.valueOf(option));
+        if (!optionIsSetted) {
+            formMap.get("option").setText(String.valueOf(option));
+        }
+    }
+    public void settlementDamage() {
+        damageIsSetted = true;
+    }
+    public void settlementOption() {
+        optionIsSetted = true;
+    }
+    public void reset() {
+        formMap.get("damage").setText("0");
+        formMap.get("option").setText("0");
+        damageIsSetted = false;
+        optionIsSetted = false;
     }
 }
