@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -172,23 +171,23 @@ public class Controller implements Initializable{
             Resource resource = getSelectedResource();
             switch (sourceId) {
                 case "attackButton":
-                    setAttack(resource);
+                    setAttack(resource,sourceId);
                     attackState = ATTACK_SELLECTED;
                     break;
                 case "magicButton":
-                    setAttack(resource);
+                    setAttack(resource,sourceId);
                     attackState = MAGIC_SELLECTED;
                     break;
                 case "piercingButton":
-                    setAttack(resource);
+                    setAttack(resource,sourceId);
                     attackState = PIERCING_SELLECTED;
                     break;
                 case "protectButton":
-                    setOption(resource);
+                    setOption(resource,sourceId);
                     optionState = PROTECT_SELLECTED;
                     break;
                 case "healButton":
-                    setOption(resource);
+                    setOption(resource,sourceId);
                     optionState = HEAL_SELLECTED;
                     break;
                 case "calcButton": // calcは計算後にresetを実行する
@@ -201,18 +200,20 @@ public class Controller implements Initializable{
             }
         }
 
-        private void setAttack(Resource resource) {
+        private void setAttack(Resource resource, String sourceId) {
             resource.settlementDamage();
             resource.setOption(0);
             diceSum = 0;
             clearCheckbox();
+            resource.selectedButton(sourceId);
         }
 
-        private void setOption(Resource resource) {
+        private void setOption(Resource resource, String sourceId) {
             resource.settlementOption();
             resource.setDamage(0);
             diceSum = 0;
             clearCheckbox();
+            resource.selectedButton(sourceId);
         }
 
         private void calc(int attackState, int optionState, Resource resource) {

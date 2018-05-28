@@ -40,17 +40,7 @@ public class Resource extends Tab {
                 ((Button) node).setOnAction(actionEventEventHandler);
             }
         }
-        switch(this.setStatus(new int[STATUS_SIZE])){
-            case SUCCESS_SET_STATUS:
-                System.out.println("success_set_status");
-                break;
-            case INVALID_ARRAY_SIZE:
-                System.out.println("invalid array size");
-                break;
-            case INVALID_STATUS:
-                System.out.println("invalid status");
-                break;
-        }
+        this.setStatus(new int[STATUS_SIZE]);
         this.reset();
         this.setOnSelectionChanged(eventHandler);
     }
@@ -150,10 +140,16 @@ public class Resource extends Tab {
             formMap.get("option").setText(String.valueOf(option));
         }
     }
+
     public void settlementDamage() {
+        buttonMap.get("attackButton").setDisable(true);
+        buttonMap.get("magicButton").setDisable(true);
+        buttonMap.get("piercingButton").setDisable(true);
         damageIsSetted = true;
     }
     public void settlementOption() {
+        buttonMap.get("healButton").setDisable(true);
+        buttonMap.get("protectButton").setDisable(true);
         optionIsSetted = true;
     }
     public void reset() {
@@ -161,5 +157,12 @@ public class Resource extends Tab {
         formMap.get("option").setText("0");
         damageIsSetted = false;
         optionIsSetted = false;
+        for (String key:buttonMap.keySet()) {
+            buttonMap.get(key).setDisable(false);
+            buttonMap.get(key).getStyleClass().removeAll("selectedButton");
+        }
+    }
+    public void selectedButton(String buttonKey) {
+        buttonMap.get(buttonKey).getStyleClass().setAll("button" , "selectedButton");
     }
 }

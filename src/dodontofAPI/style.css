@@ -6,8 +6,22 @@
 }
 .button{
     -fx-effect:null;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 4;
     -fx-background-color: white;
 }
+.button:hover {
+    -fx-background-color: #f0f0f0;
+}
+.button:disabled {
+    -fx-background-color: #aaaaaa;
+}
+.button.selectedButton {
+    -fx-text-fill: black;
+    -fx-opacity: 0.5;
+    -fx-background-color:#ffffff;
+}
+
 .root {
     /*-fx-background-color: #303030;*/
 }
