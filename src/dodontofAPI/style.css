@@ -9,6 +9,7 @@
     -fx-border-color: #aaaaaa;
     -fx-border-radius: 4;
     -fx-background-color: white;
+    -fx-opacity: 1.0;
 }
 .button:hover {
     -fx-background-color: #f0f0f0;
@@ -20,6 +21,14 @@
     -fx-text-fill: black;
     -fx-opacity: 0.5;
     -fx-background-color:#ffffff;
+}
+.diedResource {
+    -fx-opacity: 0.75;
+}
+
+.diedTab {
+    -fx-background-color: #a0a0a0;
+    -fx-opacity: 0.5;
 }
 
 .root {

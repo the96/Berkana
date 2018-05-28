@@ -107,6 +107,8 @@ public class Resource extends Tab {
         return SUCCESS_SET_STATUS;
     }
     public void setHP(int hp) {
+        if (hp < 0) hp = 0;
+        this.checkAlive(hp);
         formMap.get("hp").setText(String.valueOf(hp));
     }
     public void setMaxHP(int maxHP) {
@@ -130,6 +132,17 @@ public class Resource extends Tab {
     public void setMov(int mov) {
         formMap.get("mov").setText(String.valueOf(mov));
     }
+
+    public void checkAlive (int hp){
+        if (hp <= 0) {
+            this.getStyleClass().setAll("tab" , "diedTab");
+            this.getContent().getStyleClass().setAll("diedResource");
+        } else {
+            this.getStyleClass().removeAll("diedTab");
+            this.getContent().getStyleClass().removeAll("diedResource");
+        }
+    }
+
     public void setDamage(int damage) {
         if (!damageIsSetted) {
             formMap.get("damage").setText(String.valueOf(damage));
