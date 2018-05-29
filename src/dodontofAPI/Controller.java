@@ -8,8 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,11 +22,16 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable, LoginDialog.RefCallBack{
+    Stage stage;
+    Stage loginStage;
     @FXML
     private Label label;
     @FXML
-    private TextField roomNumber;
+    private Label roomLabel;
+    @FXML
+    private Button getChatButton;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -40,6 +48,9 @@ public class Controller implements Initializable{
     private static final String[] SERVER_URL = {"https://www.taruki.com/DodontoF_srv1/"};
 
     private ServerInfo serverInfo;
+
+    private int roomNum;
+    private String password;
 
     private int rowCount =0;
     private int diceSum;
@@ -65,10 +76,19 @@ public class Controller implements Initializable{
         scrollPane.getStyleClass().setAll("scroll-pane");
         resourceTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
         resourcePanes = new ArrayList<>();
+        loginStage = new Stage();
+        loginStage.initModality(Modality.APPLICATION_MODAL);
+        loginStage.initOwner(stage);
+        getChatButton.setDisable(true);
         diceSum = 0;
         attackState = 0;
         optionState = 0;
+        roomNum = -1;
         addTab();
+    }
+
+    public void setStage (Stage stage) {
+        this.stage = stage;
     }
 
     public void fetchServerInfo() {
@@ -78,10 +98,24 @@ public class Controller implements Initializable{
     }
 
     @FXML
+    public void openLoginDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginDialog.fxml"));
+            GridPane gridPane = loader.load();
+            LoginDialog loginDialog = loader.getController();
+            loginDialog.setReference(this::setLoginInfo);
+            loginStage.setScene(new Scene(gridPane));
+            loginStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void readChatLog() {
-        if (roomNumber.getText().isEmpty()) return;
-        //chatController.reloadChatLog(SERVER_URL[0], Integer.parseInt(roomNumber.getText()), "");
-        chatController.testReloadChatLog();
+        if (roomNum < 0) return;
+        chatController.reloadChatLog(SERVER_URL[0], roomNum, password);
+        //chatController.testReloadChatLog();
         int i = rowCount + chatController.getChatlog().size();
         for (ChatMessageDataLog chat : chatController.getChatlog()) {
             addLog(chat);
@@ -132,6 +166,17 @@ public class Controller implements Initializable{
 
     public Resource getSelectedResource() {
         return (Resource)resourceTabPane.getSelectionModel().getSelectedItem();
+    }
+
+    @Override
+    public void setLoginInfo(String room, String password) {
+        if (room.isEmpty()) return;
+        this.roomNum = Integer.parseInt(room);
+        this.password = password;
+        this.loginStage.close();
+        roomLabel.setText("room No." + roomNum);
+        getChatButton.setDisable(this.roomNum < 0);
+        this.readChatLog();
     }
 
     class ChatLogButtonHandler implements EventHandler<ActionEvent> {

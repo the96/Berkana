@@ -14,13 +14,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Hello World");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setHeight(570);
         primaryStage.setMinWidth(500);
         primaryStage.show();
+        Controller controller = loader.getController();
+        controller.setStage(primaryStage);
         final ObservableList<String> css = scene.getStylesheets();
         if (css != null) {
             css.clear();
