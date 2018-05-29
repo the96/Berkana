@@ -2,6 +2,7 @@ package dodontofAPI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -21,7 +22,7 @@ public class LoginDialog implements Initializable{
     @FXML
     TextField roomField;
     @FXML
-    TextField passwordField;
+    PasswordField passwordField;
     @FXML
     public void login() {
         ref.setLoginInfo(roomField.getText(),passwordField.getText());
