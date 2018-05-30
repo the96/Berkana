@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ChatController {
     private static final String API_URL
-            = "DodontoFServer.rb?webif=chat";
+            = "/DodontoFServer.rb?webif=chat";
     private static double latestGetTime;
     private ArrayList<ChatMessageDataLog> chatlog;
     private List<ChatMessageDataLog> lastAddedLog;

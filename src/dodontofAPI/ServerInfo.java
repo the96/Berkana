@@ -11,7 +11,7 @@ public class ServerInfo {
     private final String serverName;
     private BusyInfoStatus busyInfo;
     private static final String API_URL
-            = "DodontoFServer.rb?webif=getBusyInfo";
+            = "/DodontoFServer.rb?webif=getBusyInfo";
 
     public ServerInfo(String serverName) {
         this.serverName = serverName;

@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 

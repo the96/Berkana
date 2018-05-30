@@ -1,6 +1,8 @@
 package dodontofAPI;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -14,13 +16,15 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Properties;
 
 public class Controller implements Initializable, LoginDialog.RefCallBack{
     Stage stage;
@@ -44,11 +48,11 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
 
     private ChatController chatController;
     private ChatLogButtonHandler chatLogButtonHandler;
-
-    private static final String[] SERVER_URL = {"https://www.taruki.com/DodontoF_srv1/"};
-
     private ServerInfo serverInfo;
 
+    private Properties properties;
+
+    private String serverUrl;
     private int roomNum;
     private String password;
 
@@ -80,10 +84,23 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
         loginStage.initModality(Modality.APPLICATION_MODAL);
         loginStage.initOwner(stage);
         getChatButton.setDisable(true);
+        properties = new Properties();
+        try {
+            InputStream inputStream = new FileInputStream("serverurl.xml");
+            properties.loadFromXML(inputStream);
+            System.out.println(properties.toString());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         diceSum = 0;
         attackState = 0;
         optionState = 0;
         roomNum = -1;
+        serverUrl = "";
         addTab();
     }
 
@@ -92,7 +109,7 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
     }
 
     public void fetchServerInfo() {
-        serverInfo.reloadBusyInfo(SERVER_URL[0]);
+        serverInfo.reloadBusyInfo(serverUrl);
         label.setText(serverInfo.getLoginCount() + " / " + serverInfo.getMaxLoginCount() + "\r\n" +
                         serverInfo.getVersion());
     }
@@ -104,6 +121,11 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
             GridPane gridPane = loader.load();
             LoginDialog loginDialog = loader.getController();
             loginDialog.setReference(this::setLoginInfo);
+            ArrayList<String> serverList = new ArrayList<>();
+            for (Object key: properties.keySet()) {
+                serverList.add(key.toString());
+            }
+            loginDialog.setServerName(serverList);
             loginStage.setScene(new Scene(gridPane));
             loginStage.show();
         } catch (IOException e) {
@@ -114,7 +136,7 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
     @FXML
     public void readChatLog() {
         if (roomNum < 0) return;
-        chatController.reloadChatLog(SERVER_URL[0], roomNum, password);
+        chatController.reloadChatLog(serverUrl, roomNum, password);
         //chatController.testReloadChatLog();
         int i = rowCount + chatController.getChatlog().size();
         for (ChatMessageDataLog chat : chatController.getChatlog()) {
@@ -169,13 +191,16 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
     }
 
     @Override
-    public void setLoginInfo(String room, String password) {
+    public void setLoginInfo(String serverName, String room, String password) {
+        if (serverName.isEmpty())return;
+        this.serverUrl = properties.getProperty(serverName).toString();
+        this.fetchServerInfo();
         if (room.isEmpty()) return;
         this.roomNum = Integer.parseInt(room);
         this.password = password;
         this.loginStage.close();
-        roomLabel.setText("room No." + roomNum);
-        getChatButton.setDisable(this.roomNum < 0);
+        this.roomLabel.setText("room No." + roomNum);
+        this.getChatButton.setDisable(this.roomNum < 0);
         this.readChatLog();
     }
 

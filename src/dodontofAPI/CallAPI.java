@@ -13,6 +13,7 @@ public class CallAPI {
         String json = "";
         try {
             // urlの生成とhttps接続の準備
+            System.out.println(url);
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.addRequestProperty("User-Agent", "test program/zer1ock");
