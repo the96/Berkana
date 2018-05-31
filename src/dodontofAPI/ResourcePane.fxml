@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="400.0" prefHeight="487.0" prefWidth="400.0" style="-fx-border-radius: 2;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.ResourcePane">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="400.0" prefWidth="400.0" style="-fx-border-radius: 2;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.ResourcePane">
   <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
@@ -17,20 +18,23 @@
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="46.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="8.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="35.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="35.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
       <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
       <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="45.0" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="45.0" vgrow="NEVER" />
   </rowConstraints>
    <children>
       <Label styleClass="resourceParam" text="HP" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -205,6 +209,27 @@
          </font>
       </Button>
       <Button fx:id="resetButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Reset" GridPane.rowIndex="12">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="poisonToggle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Poison" GridPane.rowIndex="14">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Spinner fx:id="poisonStrength" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="14">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </GridPane.margin>
+      </Spinner>
+      <Button fx:id="cleanup" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Cleanup" GridPane.columnIndex="3" GridPane.rowIndex="16">
          <font>
             <Font size="18.0" />
          </font>

@@ -4,10 +4,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 
@@ -17,7 +16,8 @@ import java.util.HashMap;
 public class Resource extends Tab {
     private HashMap<String,TextField> formMap;
     private HashMap<String,Button> buttonMap;
-    private boolean damageIsSetted,optionIsSetted;
+    private HashMap<String,Spinner<Integer>> spinnerMap;
+    private boolean damageIsSetted,optionIsSetted,poisonIsSelected;
 
     public static final int SUCCESS_SET_STATUS = 1;
     public static final int INVALID_ARRAY_SIZE = 2;
@@ -25,10 +25,14 @@ public class Resource extends Tab {
 
     public static final int STATUS_SIZE = 8;
 
+    public static final String STYLE_OF_SELECTED = "selectedButton";
+    public static final String STYLE_OF_BADSTATUS = "selectedBadStatus";
+
     Resource(GridPane gridPane, EventHandler<Event> eventHandler, EventHandler<ActionEvent> actionEventEventHandler) {
         super("resource",gridPane);
         formMap = new HashMap<>();
         buttonMap = new HashMap<>();
+        spinnerMap = new HashMap<>();
         ObservableList<Node> list = gridPane.getChildren();
         for(Node node:list) {
             String id = node.getId();
@@ -38,6 +42,13 @@ public class Resource extends Tab {
             } else if (node.getClass().getName().indexOf("Button") >= 0) {
                 buttonMap.put(id,(Button) node);
                 ((Button) node).setOnAction(actionEventEventHandler);
+            } else if (node.getClass().getName().indexOf("Spinner") >= 0) {
+                spinnerMap.put(id,(Spinner) node);
+                SpinnerValueFactory<Integer> valueFactory =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE,0);
+                ((Spinner) node).setValueFactory(valueFactory);
+                ((Spinner) node).getEditor().setAlignment(Pos.CENTER_RIGHT);
+                ((Spinner) node).setPromptText(String.valueOf(0));
             }
         }
         this.setStatus(new int[STATUS_SIZE]);
@@ -89,8 +100,10 @@ public class Resource extends Tab {
     public int getOption() {
         return parseInt(formMap.get("option").getText());
     }
+    public int getPoisonStrength() { return spinnerMap.get("poisonStrength").getValue();}
 
     public int setStatus(int[] arrayStatus) {
+        // resourceName,damage,optionのフォーム以外に初期値を代入する
         if (arrayStatus.length + 3 != formMap.size()) return INVALID_ARRAY_SIZE;
         int i = 0;
         for (String key : formMap.keySet()) {
@@ -165,17 +178,39 @@ public class Resource extends Tab {
         buttonMap.get("protectButton").setDisable(true);
         optionIsSetted = true;
     }
+    public void togglePoison() {
+        poisonIsSelected = !poisonIsSelected;
+        if (poisonIsSelected) {
+            selectedButton("poisonToggle",STYLE_OF_BADSTATUS);
+        } else {
+            unselectedButton("poisonToggle",STYLE_OF_BADSTATUS);
+        }
+    }
     public void reset() {
         formMap.get("damage").setText("0");
         formMap.get("option").setText("0");
         damageIsSetted = false;
         optionIsSetted = false;
         for (String key:buttonMap.keySet()) {
-            buttonMap.get(key).setDisable(false);
-            buttonMap.get(key).getStyleClass().removeAll("selectedButton");
+            if (key.indexOf("Button") > 0) {
+                unselectedButton(key, STYLE_OF_SELECTED);
+            }
         }
     }
-    public void selectedButton(String buttonKey) {
-        buttonMap.get(buttonKey).getStyleClass().setAll("button" , "selectedButton");
+    public void selectedButton(String buttonKey, String style) {
+        buttonMap.get(buttonKey).getStyleClass().setAll("button" , style);
+    }
+    public void unselectedButton(String buttonKey, String style) {
+        buttonMap.get(buttonKey).setDisable(false);
+        buttonMap.get(buttonKey).getStyleClass().removeAll(style);
+    }
+    public void cleanupProcess() {
+        if (poisonIsSelected)poisonDamage();
+    }
+    private void poisonDamage() {
+        int poisonDamage = getPoisonStrength() * 5;
+        int hp = getHP();
+        hp = Math.max(hp - poisonDamage, 0);
+        setHP(hp);
     }
 }

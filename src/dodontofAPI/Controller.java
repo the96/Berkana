@@ -260,6 +260,12 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
                     setOption(resource,sourceId);
                     optionState = HEAL_SELLECTED;
                     break;
+                case "poisonToggle":
+                    resource.togglePoison();
+                    break;
+                case "cleanup":
+                    resource.cleanupProcess();
+                    break;
                 case "calcButton": // calcは計算後にresetを実行する
                     calc(attackState,optionState,resource);
                 case "resetButton":
@@ -270,12 +276,13 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
             }
         }
 
+        // ダメージやプロテクション、ヒールの値計算
         private void setAttack(Resource resource, String sourceId) {
             resource.settlementDamage();
             resource.setOption(0);
             diceSum = 0;
             clearCheckbox();
-            resource.selectedButton(sourceId);
+            resource.selectedButton(sourceId,Resource.STYLE_OF_SELECTED);
         }
 
         private void setOption(Resource resource, String sourceId) {
@@ -283,7 +290,7 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
             resource.setDamage(0);
             diceSum = 0;
             clearCheckbox();
-            resource.selectedButton(sourceId);
+            resource.selectedButton(sourceId,Resource.STYLE_OF_SELECTED);
         }
 
         private void calc(int attackState, int optionState, Resource resource) {
@@ -313,6 +320,9 @@ public class Controller implements Initializable, LoginDialog.RefCallBack{
             hp = Math.min(hp,maxhp);
             resource.setHP(hp);
         }
+
+        // バッドステータスの実装
+
     }
 }
 

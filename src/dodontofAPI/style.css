@@ -22,6 +22,15 @@
     -fx-opacity: 0.5;
     -fx-background-color:#ffffff;
 }
+
+.button.selectedBadStatus {
+    -fx-background-color:#ffcccc;
+}
+
+.button.selectedBadStatus:hover {
+    -fx-background-color:#ffdddd;
+}
+
 .diedResource {
     -fx-opacity: 0.75;
 }

@@ -16,7 +16,7 @@ public class CallAPI {
             System.out.println(url);
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            con.addRequestProperty("User-Agent", "test program/zer1ock");
+            con.addRequestProperty("User-Agent", "TrpgResourceManager/the96");
             con.addRequestProperty("Content-Type", "application/json; charset=UTF-8");
             con.setDoOutput(false);
             con.setDoInput(true);
