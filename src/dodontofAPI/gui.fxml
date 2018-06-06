@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="540.0" minWidth="780.0" prefHeight="685.0" prefWidth="780.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
+<GridPane alignment="center" hgap="10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="660.0" minWidth="800.0" prefHeight="660.0" prefWidth="800.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.Controller">
    <GridPane prefHeight="90.0" prefWidth="313.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
      <columnConstraints>
        <ColumnConstraints hgrow="NEVER" maxWidth="181.0" minWidth="10.0" prefWidth="73.0" />

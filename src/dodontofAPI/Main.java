@@ -18,11 +18,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gui.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Berkana - TRPG Resource Manager");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setMinHeight(660);
+        primaryStage.setMinWidth(800);
         primaryStage.setHeight(660);
-        primaryStage.setMinWidth(500);
+        primaryStage.setWidth(800);
         primaryStage.show();
         Controller controller = loader.getController();
         controller.setStage(primaryStage);
