@@ -1,4 +1,4 @@
-package dodontofAPI;
+package Berkana;
 
 public class Server {
     private final String name;

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="267.0" maxWidth="264.0" minHeight="145.0" minWidth="264.0" prefHeight="205.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dodontofAPI.LoginDialog">
+<GridPane maxHeight="267.0" maxWidth="264.0" minHeight="145.0" minWidth="264.0" prefHeight="205.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Berkana.LoginDialog">
   <columnConstraints>
     <ColumnConstraints hgrow="NEVER" maxWidth="294.0" minWidth="10.0" prefWidth="104.0" />
     <ColumnConstraints hgrow="NEVER" maxWidth="528.0" minWidth="10.0" prefWidth="187.0" />

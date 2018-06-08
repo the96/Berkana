@@ -1,4 +1,4 @@
-package dodontofAPI;
+package Berkana;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;

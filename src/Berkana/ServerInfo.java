@@ -1,4 +1,4 @@
-package dodontofAPI;
+package Berkana;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
